@@ -50,7 +50,7 @@ class LDA2Vec(Chain):
         # Precompute all neg samples since they're indep of frame
         size = context.data.shape[0]
         samples = self.sampler.sampler.sample((self.n_samples * n_frame, size))
-        samples = chainer.cuda.cupy.split(samples.ravel(), n_frame)
+        samples = np.split(samples.ravel(), n_frame)
         sources = []
         targets = []
         weights = []

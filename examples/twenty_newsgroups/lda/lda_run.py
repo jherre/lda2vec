@@ -16,9 +16,9 @@ from lda2vec import prepare_topics, print_top_words_per_topic
 from lda2vec import utils
 from lda import LDA
 
-gpu_id = int(os.getenv('CUDA_GPU', 0))
-cuda.get_device(gpu_id).use()
-print "Using GPU " + str(gpu_id)
+# gpu_id = int(os.getenv('CUDA_GPU', 0))
+# cuda.get_device(gpu_id).use()
+# print "Using GPU " + str(gpu_id)
 
 vocab = pickle.load(open('vocab.pkl', 'r'))
 corpus = pickle.load(open('corpus.pkl', 'r'))
@@ -45,7 +45,7 @@ model = LDA(n_docs, n_topics, n_units, n_vocab)
 if os.path.exists('lda.hdf5'):
     print "Reloading from saved"
     serializers.load_hdf5("lda.hdf5", model)
-model.to_gpu()
+# model.to_gpu()
 optimizer = O.Adam()
 optimizer.setup(model)
 

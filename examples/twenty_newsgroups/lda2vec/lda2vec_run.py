@@ -17,14 +17,14 @@ from lda2vec import utils
 from lda2vec import prepare_topics, print_top_words_per_topic
 from lda2vec_model import LDA2Vec
 
-gpu_id = int(os.getenv('CUDA_GPU', 0))
-cuda.get_device(gpu_id).use()
-print "Using GPU " + str(gpu_id)
+# gpu_id = int(os.getenv('CUDA_GPU', 0))
+# cuda.get_device(gpu_id).use()
+# print "Using GPU " + str(gpu_id)
 
-vocab = pickle.load(open('../data/vocab.pkl', 'r'))
-corpus = pickle.load(open('../data/corpus.pkl', 'r'))
-flattened = np.load("../data/flattened.npy")
-doc_ids = np.load("../data/doc_ids.npy")
+vocab = pickle.load(open('vocab.pkl', 'r'))
+corpus = pickle.load(open('corpus.pkl', 'r'))
+flattened = np.load("flattened.npy")
+doc_ids = np.load("doc_ids.npy")
 
 # Model Parameters
 # Number of documents
@@ -48,7 +48,7 @@ model = LDA2Vec(n_documents=n_docs, n_document_topics=n_topics,
 if os.path.exists('lda2vec.hdf5'):
     print "Reloading from saved"
     serializers.load_hdf5("lda2vec.hdf5", model)
-model.to_gpu()
+# model.to_gpu()
 optimizer = O.Adam()
 optimizer.setup(model)
 clip = chainer.optimizer.GradientClipping(5.0)
